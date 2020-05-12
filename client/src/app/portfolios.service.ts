@@ -15,7 +15,8 @@ export class PortfoliosService {
   portfoliosUrl = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&user_id=91622522@N07&api_key=3426649638b25fe317be122d3fbbc1b1&format=json&jsoncallback=JSONP_CALLBACK';
   portfolioPhotosUrl = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&extras=url_m,url_o&photoset_id=${0}&api_key=3426649638b25fe317be122d3fbbc1b1&format=json&jsoncallback=JSONP_CALLBACK';
   // TODO: Where do I store this data?
-  private portfolios: Portfolio[] = [];
+  // TODO: Should I be using Redux?
+  public portfolios: Portfolio[] = [];
 
   constructor(
     private loggerService: LoggerService, private http: HttpClient) { }
@@ -23,7 +24,7 @@ export class PortfoliosService {
   fetch() {
     return this.http.jsonp(this.portfoliosUrl, 'callback').pipe(
       map(res => {
-        return res['photosets']['photoset'].map(photoset => {
+        this.portfolios = res['photosets']['photoset'].map(photoset => {
           return new Portfolio(
             photoset.id,
             photoset.owner,
@@ -35,6 +36,7 @@ export class PortfoliosService {
             photoset.visibility_can_see_set
           );
         });
+        return this.portfolios;
       })
     );
   }
