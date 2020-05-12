@@ -10,7 +10,7 @@ describe('PortfoliosService', () => {
     service = TestBed.inject(PortfoliosService);
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule], 
-      providers: [service]
+      providers: [PortfoliosService]
     })
   });
 
