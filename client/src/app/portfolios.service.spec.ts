@@ -7,10 +7,11 @@ describe('PortfoliosService', () => {
   let service: PortfoliosService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-    });
     service = TestBed.inject(PortfoliosService);
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule], 
+      providers: [service]
+    })
   });
 
   it('should be created', () => {
