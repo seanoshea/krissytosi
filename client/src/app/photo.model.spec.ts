@@ -1,7 +1,7 @@
-import { Photo } from './photo.model';
+import { Photo } from './model';
 
 describe('Photo', () => {
   it('should create an instance', () => {
-    expect(new Photo()).toBeTruthy();
+    expect(new Photo('id', 'title', 'ispublic', 'url_m', 'height_m', 'width_m', 'url_o', 'height_o', 'width_o')).toBeTruthy();
   });
 });
