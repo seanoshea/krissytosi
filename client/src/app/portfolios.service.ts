@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { HttpErrorResponse, HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Portfolio } from './portfolio.model';
 import { Photo } from './photo.model';
-import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +15,7 @@ export class PortfoliosService {
   // TODO: Should I be using Redux?
   public portfolios: Portfolio[] = [];
 
-  constructor(
-    private loggerService: LoggerService, private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   fetch() {
     return this.http.jsonp(this.portfoliosUrl, 'callback').pipe(
@@ -61,15 +57,4 @@ export class PortfoliosService {
       })
     );
   }
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      this.loggerService.error(`An error occurred: ${error.error.message}`);
-    } else {
-      this.loggerService.error(
-        `API code ${error.status}, body was: ${error.error}`);
-    }
-    return throwError(
-      'Something bad happened; please try again later.');
-  };
 }

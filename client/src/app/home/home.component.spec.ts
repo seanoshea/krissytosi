@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { DebugElement } from '@angular/core';
+import { Router }       from '@angular/router';
 
 import { HomeComponent } from './home.component';
+import { PortfoliosService } from '../portfolios.service';
+import { TestPortfoliosService } from '../../testing/test-portfolio-service';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -8,9 +12,12 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ]
+      declarations: [ HomeComponent ],
+      providers: [{
+        provide: PortfoliosService, useClass: TestPortfoliosService,
+      }],
     })
-    .compileComponents();
+    .compileComponents()
   }));
 
   beforeEach(() => {
