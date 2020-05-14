@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Portfolio }                from '../portfolio.model';
 import { PortfoliosService }         from '../portfolios.service';
 
 @Component({
@@ -18,15 +17,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.service.observablePortfolios.subscribe(portfolios => {
-      this.service.fetchPhotos(this.randomizeFirstPortfolio().id).subscribe(photos => {
-        this.loading = false;
-        this.randomizedPhoto = photos[0];
-      });
+      const first = this.randomizeFirstPortfolio();
+      if (first) {
+        this.service.fetchPhotos(first.id).subscribe(photos => {
+          this.loading = false;
+          this.randomizedPhoto = photos[0];
+        });
+      }
     });
   }
 
   randomizeFirstPortfolio() {
-    console.warn('FFS', this.service.portfolios.length);
     const index = Math.floor(Math.random() * this.service.portfolios.length - 1)
     this.randomizedPortfolio = this.service.portfolios[index];
     return this.randomizedPortfolio;

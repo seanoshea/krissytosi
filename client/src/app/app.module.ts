@@ -10,6 +10,7 @@ import { ContactComponent } from './contact/contact.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { PortfoliosService } from './portfolios.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     HttpClientJsonpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [PortfoliosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

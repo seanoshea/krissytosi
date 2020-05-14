@@ -7,13 +7,12 @@ import { PortfoliosService } from '../portfolios.service';
   styleUrls: ['./navigation.component.less']
 })
 export class NavigationComponent implements OnInit {
-  // doesnt feel right to duplicate this data.
-  portfolios: any;
-  constructor(private service: PortfoliosService) { }
+  loading = true;
+  constructor(public service: PortfoliosService) { }
 
   ngOnInit(): void {
     this.service.observablePortfolios.subscribe(p => {
-      // redraw
+      this.loading = false;  
     });
   }
 }

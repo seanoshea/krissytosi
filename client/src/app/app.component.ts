@@ -9,11 +9,10 @@ import { PortfoliosService } from './portfolios.service';
 })
 export class AppComponent {
   title = 'Krissy O\'Shea';
-  portfolios: Portfolio[];
 
   constructor(private service: PortfoliosService) { }
 
   ngOnInit():void {
-    this.service.fetch();
+    this.service.fetch().subscribe();
   }
 }
