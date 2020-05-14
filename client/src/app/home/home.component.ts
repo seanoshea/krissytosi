@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   randomizedPhoto;
 
   ngOnInit() {
-    this.service.fetch().subscribe(portfolios => {
+    this.service.observablePortfolios.subscribe(portfolios => {
       this.service.fetchPhotos(this.randomizeFirstPortfolio().id).subscribe(photos => {
         this.loading = false;
         this.randomizedPhoto = photos[0];
@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   }
 
   randomizeFirstPortfolio() {
+    console.warn('FFS', this.service.portfolios.length);
     const index = Math.floor(Math.random() * this.service.portfolios.length - 1)
     this.randomizedPortfolio = this.service.portfolios[index];
     return this.randomizedPortfolio;

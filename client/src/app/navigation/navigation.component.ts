@@ -13,7 +13,7 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.observablePortfolios.subscribe(p => {
-      this.portfolios = p;
+      // redraw
     });
   }
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Portfolio } from './portfolio.model';
+import { PortfoliosService } from './portfolios.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Krissy O\'Shea';
+  portfolios: Portfolio[];
+
+  constructor(private service: PortfoliosService) { }
+
+  ngOnInit():void {
+    this.service.fetch();
+  }
 }
