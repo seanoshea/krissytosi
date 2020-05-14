@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { PortfoliosService } from '../portfolios.service';
 
 @Component({
@@ -8,14 +7,13 @@ import { PortfoliosService } from '../portfolios.service';
   styleUrls: ['./navigation.component.less']
 })
 export class NavigationComponent implements OnInit {
+  // doesnt feel right to duplicate this data.
   portfolios: any;
   constructor(private service: PortfoliosService) { }
 
   ngOnInit(): void {
     this.service.observablePortfolios.subscribe(p => {
-      console.warn('Found em', p);
       this.portfolios = p;
-      // this.crowd= item;
     });
   }
 }
