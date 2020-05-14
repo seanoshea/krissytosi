@@ -1,25 +1,25 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomeComponent } from './home.component';
+import { NavigationComponent } from './navigation.component';
 import { PortfoliosService } from '../portfolios.service';
-import { TestPortfoliosService } from '../../testing/test-portfolio-service';
+import { TestPortfoliosService } from 'src/testing/test-portfolio-service';
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+describe('NavigationComponent', () => {
+  let component: NavigationComponent;
+  let fixture: ComponentFixture<NavigationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [ NavigationComponent ],
       providers: [{
         provide: PortfoliosService, useClass: TestPortfoliosService,
       }],
     })
-    .compileComponents()
+    .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeComponent);
+    fixture = TestBed.createComponent(NavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

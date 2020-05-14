@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 import { Portfolio } from './portfolio.model';
 import { Photo } from './photo.model';
@@ -14,8 +15,11 @@ export class PortfoliosService {
   // TODO: Where do I store this data?
   // TODO: Should I be using Redux?
   public portfolios: Portfolio[] = [];
+  observablePortfolios: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.observablePortfolios = new BehaviorSubject<Portfolio[]>(this.portfolios);
+  }
 
   fetch() {
     return this.http.jsonp(this.portfoliosUrl, 'callback').pipe(
@@ -32,6 +36,7 @@ export class PortfoliosService {
             photoset.visibility_can_see_set
           );
         });
+        this.observablePortfolios.next(this.portfolios);
         return this.portfolios;
       })
     );
