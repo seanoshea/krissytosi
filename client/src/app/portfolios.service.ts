@@ -26,18 +26,7 @@ export class PortfoliosService {
   fetch() {
     return this.http.jsonp(this.portfoliosUrl, 'callback').pipe(
       map(res => {
-        this.portfolios = res['photosets']['photoset'].map(photoset => {
-          return new Portfolio(
-            photoset.id,
-            photoset.owner,
-            photoset.username,
-            photoset.primary,
-            photoset.count_photos,
-            photoset.count_videos,
-            photoset.title['_content'],
-            photoset.visibility_can_see_set
-          );
-        });
+        this.portfolios = this.parsePortfolios(res);
         this.observablePortfolios.next(this.portfolios);
         return this.portfolios;
       })
@@ -71,5 +60,20 @@ export class PortfoliosService {
 
   hasLoadedPhotosForPortfolio(portfolio) {
     return portfolio && this.photos[portfolio.id];
+  }
+
+  parsePortfolios(json) {
+    return json['photosets']['photoset'].map(photoset => {
+      return new Portfolio(
+        photoset.id,
+        photoset.owner,
+        photoset.username,
+        photoset.primary,
+        photoset.count_photos,
+        photoset.count_videos,
+        photoset.title['_content'],
+        photoset.visibility_can_see_set
+      );
+    });
   }
 }

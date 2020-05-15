@@ -6,7 +6,9 @@ import { asyncData } from './async-observable-helper';
 import { Portfolio }          from '../app/portfolio.model';
 import { Photo }          from '../app/photo.model';
 import { PortfoliosService }   from '../app/portfolios.service';
-import { testPortfolios, testPhotos } from './test-portfolios-photos';
+
+const portfolioJSON: any = require('../testing/mocked_responses/portfolios.json');
+const photosJSON: any = require('../testing/mocked_responses/photos.json');
 
 @Injectable()
 export class TestPortfoliosService extends PortfoliosService {
@@ -15,8 +17,8 @@ export class TestPortfoliosService extends PortfoliosService {
     super(null);
   }
 
-  mockedPortfolios = testPortfolios();
-  mockedPhotos = testPhotos();
+  mockedPortfolios = portfolioJSON;
+  mockedPhotos = photosJSON;
 
   fetch(): Observable<Portfolio[]> {
     return asyncData(this.portfolios)
@@ -42,7 +44,7 @@ export class MockedPortfoliosService extends PortfoliosService {
   }
 
   get portfolios() {
-    return testPortfolios()['photosets']['photoset'].map(photoset => {
+    return portfolioJSON['photosets']['photoset'].map(photoset => {
       return new Portfolio(
         photoset.id,
         photoset.owner,

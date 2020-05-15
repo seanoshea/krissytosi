@@ -42,7 +42,6 @@ export class HomeComponent implements OnInit {
 
   photosLoaded(photos) {
     this.loading = false;
-    console.warn('setting to ', photos);
     this.randomizedPhoto = photos[0];
   }
 
