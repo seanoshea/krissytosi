@@ -17,9 +17,11 @@ export class PortfolioComponent implements OnInit {
     if (!this.service.selectedPortfolio) {
       this.router.navigate(['/']);
     } else {
+      // ok - we have one. I wonder if we already have the photos for this?
       if (this.service.hasLoadedPhotosForPortfolio(this.service.selectedPortfolio)) {
         this.photos = this.service.photos[this.service.selectedPortfolio.id];
       } else {
+        // better find the photos and display them
         this.service.fetchPhotos(this.service.selectedPortfolio.id).subscribe(() => {
           this.photos = this.service.photos[this.service.selectedPortfolio.id];
         });
