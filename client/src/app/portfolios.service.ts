@@ -16,7 +16,7 @@ export class PortfoliosService {
   public photos: Photo[] = [];
   observablePortfolios: any;
   observablePhotos: any;
-  selectedPortfolio: Portfolio;
+  public selectedPortfolio: Portfolio;
 
   constructor(private http: HttpClient) {
     this.observablePortfolios = new BehaviorSubject<Portfolio[]>(this.portfolios);
