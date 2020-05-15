@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { PortfoliosService } from './portfolios.service';
+import { ResponsiveDirective } from './responsive.directive';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PortfoliosService } from './portfolios.service';
     ContactComponent,
     HomeComponent,
     PageNotFoundComponent,
-    NavigationComponent
+    NavigationComponent,
+    ResponsiveDirective
   ],
   imports: [
     BrowserModule,

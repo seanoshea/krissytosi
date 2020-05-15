@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PortfoliosService } from '../portfolios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-portfolio',
@@ -6,10 +8,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./portfolio.component.less']
 })
 export class PortfolioComponent implements OnInit {
+  photos:any;
 
-  constructor() { }
+  constructor(private router: Router, private service: PortfoliosService) { }
 
   ngOnInit(): void {
+    // ensure that we have at least a portfolio
+    if (!this.service.selectedPortfolio) {
+      this.router.navigate(['/']);
+    } else {
+      if (this.service.hasLoadedPhotosForPortfolio()) {
+        this.photos = this.service.photos[this.service.selectedPortfolio.id];
+      } else {
+        this.service.fetchPhotos(this.service.selectedPortfolio.id).subscribe(() => {
+          this.photos = this.service.photos[this.service.selectedPortfolio.id];
+        });
+      }
+    }
   }
-
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { PortfoliosService }         from '../portfolios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { PortfoliosService }         from '../portfolios.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private service: PortfoliosService) { }
+  constructor(private router:Router, private service: PortfoliosService) { }
 
   loading:boolean = true;
   randomizedPortfolio;
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
   }
 
   mainScreenImagePressed() {
-
+    this.service.selectedPortfolio = this.randomizedPortfolio;
+    this.router.navigate(['/portfolio']);
   }
 }

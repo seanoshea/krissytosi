@@ -34,3 +34,28 @@ export class TestPortfoliosService extends PortfoliosService {
     this.mockedPortfolios = p;
   }
 }
+
+@Injectable()
+export class MockedPortfoliosService extends PortfoliosService {
+  constructor() {
+    super(null);
+  }
+
+  get portfolios() {
+    return testPortfolios()['photosets']['photoset'].map(photoset => {
+      return new Portfolio(
+        photoset.id,
+        photoset.owner,
+        photoset.username,
+        photoset.primary,
+        photoset.count_photos,
+        photoset.count_videos,
+        photoset.title['_content'],
+        photoset.visibility_can_see_set
+      );
+    });
+  }
+
+  set portfolios(p) {
+  }
+}

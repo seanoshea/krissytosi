@@ -12,13 +12,15 @@ import { Photo } from './photo.model';
 export class PortfoliosService {
   portfoliosUrl = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getList&user_id=91622522@N07&api_key=3426649638b25fe317be122d3fbbc1b1&format=json&jsoncallback=JSONP_CALLBACK';
   portfolioPhotosUrl = 'https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&extras=url_m,url_o&photoset_id=${0}&api_key=3426649638b25fe317be122d3fbbc1b1&format=json&jsoncallback=JSONP_CALLBACK';
-  // TODO: Where do I store this data?
-  // TODO: Should I be using Redux?
   public portfolios: Portfolio[] = [];
+  public photos: Photo[] = [];
   observablePortfolios: any;
+  observablePhotos: any;
+  selectedPortfolio: Portfolio;
 
   constructor(private http: HttpClient) {
     this.observablePortfolios = new BehaviorSubject<Portfolio[]>(this.portfolios);
+    this.observablePhotos = new BehaviorSubject<{}>(this.photos);
   }
 
   fetch() {
@@ -46,7 +48,7 @@ export class PortfoliosService {
     const url = this.portfolioPhotosUrl.replace('${0}', id);
     return this.http.jsonp(url, 'callback').pipe(
       map(res => {
-        return res['photoset']['photo'].map(photo => {
+        const photos = res['photoset']['photo'].map(photo => {
           return new Photo(
             photo.id,
             photo.title,
@@ -59,7 +61,15 @@ export class PortfoliosService {
             photo.width_o
           );
         });
+        // store this for later
+        this.photos[id] = photos;
+        this.observablePhotos.next(this.photos);
+        return photos;
       })
     );
+  }
+
+  hasLoadedPhotosForPortfolio() {
+    return this.selectedPortfolio && this.photos[this.selectedPortfolio.id];
   }
 }

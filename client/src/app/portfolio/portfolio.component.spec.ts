@@ -1,6 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PortfolioComponent } from './portfolio.component';
+import { RouterTestingModule } from '@angular/router/testing';
+import { PortfoliosService } from '../portfolios.service';
+import { TestPortfoliosService } from 'src/testing/test-portfolio-service';
 
 describe('PortfolioComponent', () => {
   let component: PortfolioComponent;
@@ -8,7 +11,11 @@ describe('PortfolioComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PortfolioComponent ]
+      imports: [ RouterTestingModule ],
+      declarations: [ PortfolioComponent ],
+      providers: [{
+        provide: PortfoliosService, useClass: TestPortfoliosService,
+      }],
     })
     .compileComponents();
   }));
