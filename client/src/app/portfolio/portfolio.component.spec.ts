@@ -4,9 +4,7 @@ import { PortfolioComponent } from './portfolio.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { PortfoliosService } from '../portfolios.service';
 import { TestPortfoliosService } from 'src/testing/test-portfolio-service';
-import { mockedPortfolio } from 'src/testing/test-utils';
 import { Router } from '@angular/router';
-import { Portfolio } from '../portfolio.model';
 
 describe('PortfolioComponent', () => {
   let component: PortfolioComponent;
