@@ -17,7 +17,7 @@ export class PortfolioComponent implements OnInit {
     if (!this.service.selectedPortfolio) {
       this.router.navigate(['/']);
     } else {
-      if (this.service.hasLoadedPhotosForPortfolio()) {
+      if (this.service.hasLoadedPhotosForPortfolio(this.service.selectedPortfolio)) {
         this.photos = this.service.photos[this.service.selectedPortfolio.id];
       } else {
         this.service.fetchPhotos(this.service.selectedPortfolio.id).subscribe(() => {

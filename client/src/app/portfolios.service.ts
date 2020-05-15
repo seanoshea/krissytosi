@@ -69,7 +69,7 @@ export class PortfoliosService {
     );
   }
 
-  hasLoadedPhotosForPortfolio() {
-    return this.selectedPortfolio && this.photos[this.selectedPortfolio.id];
+  hasLoadedPhotosForPortfolio(portfolio) {
+    return portfolio && this.photos[portfolio.id];
   }
 }
