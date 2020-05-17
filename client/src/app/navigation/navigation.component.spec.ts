@@ -23,8 +23,8 @@ describe('NavigationComponent', () => {
       }],
     })
     .compileComponents();
-    router = TestBed.get(Router);
-    service = TestBed.get(PortfoliosService);
+    router = TestBed.inject(Router);
+    service = TestBed.inject(PortfoliosService);
   }));
 
   beforeEach(() => {

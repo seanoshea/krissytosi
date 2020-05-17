@@ -26,8 +26,8 @@ describe('PortfolioComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PortfolioComponent);
-    router = TestBed.get(Router);
-    service = TestBed.get(PortfoliosService);
+    router = TestBed.inject(Router);
+    service = TestBed.inject(PortfoliosService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
