@@ -65,7 +65,7 @@ describe('PortfolioComponent', () => {
     describe('Has not loaded photos for this portfolio', () => {
       it('should make an api call for retrieving the photos', () => {
         const hasLoadedSpy = spyOn(service, 'hasLoadedPhotosForPortfolio').and.returnValue(false);
-        
+
         const apiSpy = spyOn(service, 'fetchPhotos').and.callThrough();
 
         component.ngOnInit();

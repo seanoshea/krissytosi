@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PortfoliosService }         from '../portfolios.service';
+import { PortfoliosService } from '../portfolios.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,9 +10,9 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router:Router, private service: PortfoliosService) { }
+  constructor(private router: Router, private service: PortfoliosService) { }
 
-  loading:boolean = true;
+  loading = true;
   randomizedPortfolio;
   randomizedPhoto;
 
@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   randomizeFirstPortfolio() {
-    const index = Math.floor(Math.random() * this.service.portfolios.length - 1)
+    const index = Math.floor(Math.random() * this.service.portfolios.length - 1);
     this.randomizedPortfolio = this.service.portfolios[index];
     return this.randomizedPortfolio;
   }

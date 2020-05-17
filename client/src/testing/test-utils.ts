@@ -1,7 +1,7 @@
 import { Photo } from 'src/app/photo.model';
 
 export function mockedPhoto(json) {
-  const photos = json['photoset']['photo'].map(photo => {
+  const photos = json.photoset.photo.map(photo => {
     return new Photo(
       photo.id,
       photo.title,

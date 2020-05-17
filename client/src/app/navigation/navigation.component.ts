@@ -15,17 +15,17 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.observablePortfolios.subscribe(() => {
-      this.loading = false;  
+      this.loading = false;
     });
   }
 
-  portfolioLinkPressed():void {
+  portfolioLinkPressed(): void {
     if (!this.loading) {
       this.showSubnavigation = !this.showSubnavigation;
     }
   }
 
-  portfolioPressed(portfolio:Portfolio): void {
+  portfolioPressed(portfolio: Portfolio): void {
     this.service.selectedPortfolio = portfolio;
     this.router.navigate(['/portfolio']);
   }

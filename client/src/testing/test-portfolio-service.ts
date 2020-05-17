@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { asyncData } from './async-observable-helper';
 
-import { Portfolio }          from '../app/portfolio.model';
-import { Photo }          from '../app/photo.model';
-import { PortfoliosService }   from '../app/portfolios.service';
+import { Portfolio } from '../app/portfolio.model';
+import { Photo } from '../app/photo.model';
+import { PortfoliosService } from '../app/portfolios.service';
 
 const portfolioJSON: any = require('../testing/mocked_responses/portfolios.json');
 const photosJSON: any = require('../testing/mocked_responses/photos.json');
@@ -21,7 +21,7 @@ export class TestPortfoliosService extends PortfoliosService {
   mockedPhotos = photosJSON;
 
   fetch(): Observable<Portfolio[]> {
-    return asyncData(this.portfolios)
+    return asyncData(this.portfolios);
   }
 
   fetchPhotos(id: number | string): Observable<Photo[]> {
@@ -44,18 +44,7 @@ export class MockedPortfoliosService extends PortfoliosService {
   }
 
   get portfolios() {
-    return portfolioJSON['photosets']['photoset'].map(photoset => {
-      return new Portfolio(
-        photoset.id,
-        photoset.owner,
-        photoset.username,
-        photoset.primary,
-        photoset.count_photos,
-        photoset.count_videos,
-        photoset.title['_content'],
-        photoset.visibility_can_see_set
-      );
-    });
+    return this.parsePortfolios(portfolioJSON);
   }
 
   set portfolios(p) {

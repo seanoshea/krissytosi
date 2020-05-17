@@ -64,7 +64,7 @@ describe('HomeComponent', () => {
       it('should make an API call to get the photos for a portfolio', () => {
         const randomizedSpy = spyOn(component, 'randomizeFirstPortfolio').and.returnValue(service.selectedPortfolio);
         const hasLoadedSpy = spyOn(service, 'hasLoadedPhotosForPortfolio').and.returnValue(false);
-        
+
         const apiSpy = spyOn(service, 'fetchPhotos').and.callThrough();
 
         component.ngOnInit();

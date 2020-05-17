@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./portfolio.component.less']
 })
 export class PortfolioComponent implements OnInit {
-  photos:any;
+  photos: any;
 
   constructor(private router: Router, private service: PortfoliosService) { }
 

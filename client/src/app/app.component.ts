@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Portfolio } from './portfolio.model';
+import { Component, OnInit } from '@angular/core';
 import { PortfoliosService } from './portfolios.service';
 
 @Component({
@@ -7,12 +6,12 @@ import { PortfoliosService } from './portfolios.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Krissy O\'Shea';
 
   constructor(private service: PortfoliosService) { }
 
-  ngOnInit():void {
+  ngOnInit(): void {
     this.service.fetch().subscribe();
   }
 }

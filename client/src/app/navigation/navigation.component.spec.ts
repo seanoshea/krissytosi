@@ -47,9 +47,9 @@ describe('NavigationComponent', () => {
     describe('portfolios have not loaded', () => {
       it('should not open the secondary navigation', () => {
         component.loading = true;
-  
+
         component.portfolioLinkPressed();
-  
+
         expect(component.showSubnavigation).toBeFalse();
       });
     });
@@ -62,7 +62,7 @@ describe('NavigationComponent', () => {
           component.showSubnavigation = false;
 
           component.portfolioLinkPressed();
-    
+
           expect(component.showSubnavigation).toBeTrue();
         });
       });
@@ -71,7 +71,7 @@ describe('NavigationComponent', () => {
           component.showSubnavigation = true;
 
           component.portfolioLinkPressed();
-      
+
           expect(component.showSubnavigation).toBeFalse();
         });
       });

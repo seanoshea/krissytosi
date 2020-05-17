@@ -33,7 +33,7 @@ export class PortfoliosService {
     );
   }
 
-  fetchPhotos(id:string) {
+  fetchPhotos(id: string) {
     const url = this.portfolioPhotosUrl.replace('${0}', id);
     return this.http.jsonp(url, 'callback').pipe(
       map(res => {
@@ -63,7 +63,7 @@ export class PortfoliosService {
   }
 
   parsePortfolios(json) {
-    return json['photosets']['photoset'].map(photoset => {
+    return json.photosets.photoset.map(photoset => {
       return new Portfolio(
         photoset.id,
         photoset.owner,
@@ -71,7 +71,7 @@ export class PortfoliosService {
         photoset.primary,
         photoset.count_photos,
         photoset.count_videos,
-        photoset.title['_content'],
+        photoset.title._content,
         photoset.visibility_can_see_set
       );
     });
