@@ -5,6 +5,7 @@ import { PortfoliosService } from '../portfolios.service';
 import { MockedPortfoliosService } from '../../testing/test-portfolio-service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Router } from '@angular/router';
+import { By } from '@angular/platform-browser';
 const portfolioJSON: any = require('../../testing/mocked_responses/portfolios.json');
 
 describe('NavigationComponent', () => {
@@ -36,7 +37,48 @@ describe('NavigationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Pressing on one of the navigation items', () => {
+  describe('initialization', () => {
+    it('should hide the secondary navigation by default', () => {
+      expect(fixture.debugElement.query(By.css('.secondaryNavigation'))).toBeNull();
+    });
+  });
+
+  describe('Interactions with the portfolio navigation item', () => {
+    describe('portfolios have not loaded', () => {
+      it('should not open the secondary navigation', () => {
+        component.loading = true;
+  
+        component.portfolioLinkPressed();
+  
+        expect(component.showSubnavigation).toBeFalse();
+      });
+    });
+    describe('portfolios have loaded', () => {
+      beforeEach(() => {
+        component.loading = false;
+      });
+      describe('secondary navigation is not already open', () => {
+        it('should open the secondary navigation item', () => {
+          component.showSubnavigation = false;
+
+          component.portfolioLinkPressed();
+    
+          expect(component.showSubnavigation).toBeTrue();
+        });
+      });
+      describe('secondary navigation is already open', () => {
+        it('should close the secondary navigation item', () => {
+          component.showSubnavigation = true;
+
+          component.portfolioLinkPressed();
+      
+          expect(component.showSubnavigation).toBeFalse();
+        });
+      });
+    });
+  });
+
+  describe('Pressing on one of the secondary navigation items', () => {
     it('should send you over to the portfolio screen', () => {
       const portfolios = service.parsePortfolios(portfolioJSON);
       const navigateSpy = spyOn(router, 'navigate');

@@ -1,10 +1,10 @@
 <ul>
     <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-    <li><a routerLink="/portfolio" routerLinkActive="active">Portfolio</a></li>
+    <li><a routerLink="/" (click)="portfolioLinkPressed()">Portfolio</a></li>
     <li><a routerLink="/about" routerLinkActive="active">About</a></li>
     <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
 </ul>
-<ul *ngIf="!loading">
+<ul *ngIf="showSubnavigation" class="secondaryNavigation">
     <li *ngFor="let portfolio of service.portfolios">
         <a [routerLink]="" (click)="portfolioPressed(portfolio)">{{portfolio.title}}</a>
     </li>
