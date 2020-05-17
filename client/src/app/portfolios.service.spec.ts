@@ -1,10 +1,9 @@
-import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { PortfoliosService } from './portfolios.service';
 
 import { asyncData, asyncError } from '../testing/async-observable-helper';
+import { mockedPhoto } from '../testing/test-utils';
 const portfolioJSON: any = require('../testing/mocked_responses/portfolios.json');
 const photosJSON: any = require('../testing/mocked_responses/photos.json');
 
@@ -44,6 +43,26 @@ describe('PortfoliosService', () => {
         portfolios => fail('expected an error, not portfolios'),
         error  => expect(error.message).toContain('404 Not Found')
       );
+    });
+
+    describe('Photos for Portfolio', () => {
+      describe('undefined portfolio', () => {
+        it('should know that there are no photos loaded', () => {
+          expect(service.hasLoadedPhotosForPortfolio(undefined)).toBeUndefined();
+        });
+      });
+      describe('defined portfolio', () => {
+        let portfolio;
+        beforeAll(() => {
+          const portfolios = service.parsePortfolios(portfolioJSON);
+          portfolio = portfolios[0];
+        });
+        describe('photos not loaded', () => {
+          it('should not indicate that photos are loaded', () => {
+            expect(service.hasLoadedPhotosForPortfolio(portfolio)).toBeUndefined();
+          });
+        });
+      });
     });
   });
 

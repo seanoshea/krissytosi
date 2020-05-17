@@ -1,5 +1,5 @@
 <ul>
-	<li ng-repeat="photo in photos">
-		<img responsive appResponsive itemscope itemtype="http://schema.org/Photograph" />
-	</li>
+	<li *ngFor="let photo of photos">
+		<img itemscope itemtype="http://schema.org/Photograph" src="{{photo}}" />
+    </li>
 <ul>

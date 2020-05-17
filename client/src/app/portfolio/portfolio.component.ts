@@ -19,13 +19,21 @@ export class PortfolioComponent implements OnInit {
     } else {
       // ok - we have one. I wonder if we already have the photos for this?
       if (this.service.hasLoadedPhotosForPortfolio(this.service.selectedPortfolio)) {
-        this.photos = this.service.photos[this.service.selectedPortfolio.id];
+        this.photosLoaded();
       } else {
         // better find the photos and display them
         this.service.fetchPhotos(this.service.selectedPortfolio.id).subscribe(() => {
-          this.photos = this.service.photos[this.service.selectedPortfolio.id];
+          this.photosLoaded();
         });
       }
+    }
+  }
+
+  photosLoaded(): void {
+    if (this.service.photos[this.service.selectedPortfolio.id]) {
+      this.photos = this.service.photos[this.service.selectedPortfolio.id].map((photo) => {
+        return photo.url_m;
+      });
     }
   }
 }

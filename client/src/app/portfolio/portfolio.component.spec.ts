@@ -5,7 +5,9 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { PortfoliosService } from '../portfolios.service';
 import { TestPortfoliosService } from 'src/testing/test-portfolio-service';
 import { Router } from '@angular/router';
+import { mockedPhoto } from '../../testing/test-utils';
 const portfolioJSON: any = require('../../testing/mocked_responses/portfolios.json');
+const photosJSON: any = require('../../testing/mocked_responses/photos.json');
 
 describe('PortfolioComponent', () => {
   let component: PortfolioComponent;
@@ -50,6 +52,8 @@ describe('PortfolioComponent', () => {
     beforeEach(() => {
       const portfolios = service.parsePortfolios(portfolioJSON);
       service.selectedPortfolio = portfolios[0];
+      service.photos = [];
+      service.photos[service.selectedPortfolio] = [mockedPhoto(photosJSON)];
     });
     describe('Has loaded photos for this portfolio', () => {
       it('should not make an api call for retrieving the photos', () => {
@@ -65,7 +69,6 @@ describe('PortfolioComponent', () => {
     describe('Has not loaded photos for this portfolio', () => {
       it('should make an api call for retrieving the photos', () => {
         const hasLoadedSpy = spyOn(service, 'hasLoadedPhotosForPortfolio').and.returnValue(false);
-
         const apiSpy = spyOn(service, 'fetchPhotos').and.callThrough();
 
         component.ngOnInit();
