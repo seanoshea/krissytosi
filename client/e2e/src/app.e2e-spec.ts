@@ -1,7 +1,7 @@
 import { AppPage } from './app.po';
 import { browser, logging, element, by } from 'protractor';
 
-describe('client App', () => {
+describe('Home Page', () => {
   let page: AppPage;
   const selector = 'img.homePageImage';
 
