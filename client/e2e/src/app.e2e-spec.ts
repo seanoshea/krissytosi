@@ -31,7 +31,11 @@ describe('Home Page', () => {
   });
 
   it('should navigate to the portfolios page when the user clicks on the home image', async () => {
-    await element(by.css(selector)).click();
+    const homePageImageElement = await element(by.css(selector));
+    await homePageImageElement.isPresent();
+
+    await homePageImageElement.click();
+
     expect(browser.getCurrentUrl()).toContain("/portfolio");
   });
 
