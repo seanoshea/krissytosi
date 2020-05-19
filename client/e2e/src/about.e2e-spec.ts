@@ -1,11 +1,8 @@
-import { AppPage } from './app.po';
 import { browser, logging, element, by } from 'protractor';
 
 describe('About Page', () => {
-  let page: AppPage;
 
   beforeEach(async () => {
-    page = new AppPage();
     await browser.get(`${browser.baseUrl}/about`);
   });
 

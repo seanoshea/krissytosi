@@ -1,12 +1,9 @@
-import { AppPage } from './app.po';
 import { browser, logging, element, by } from 'protractor';
 
 describe('Portfolios Page', () => {
-  let page: AppPage;
   let selector = 'img.homePageImage';
 
   beforeEach(async () => {
-    page = new AppPage();
     await browser.get(browser.baseUrl);
   });
 
