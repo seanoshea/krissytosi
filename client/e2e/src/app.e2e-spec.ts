@@ -29,7 +29,7 @@ describe('Home Page', () => {
 
   it('should navigate to the portfolios page when the user clicks on the home image', async () => {
     const homePageImageElement = await element(by.css(selector));
-    await homePageImageElement.isPresent();
+    await homePageImageElement.isDisplayed();
 
     await homePageImageElement.click();
 

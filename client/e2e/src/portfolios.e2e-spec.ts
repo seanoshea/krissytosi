@@ -9,7 +9,7 @@ describe('Portfolios Page', () => {
 
   it('should should show a list of images for the portfolio', async () => {
     const homePageImageElement = await element(by.css(selector));
-    await homePageImageElement.isPresent();
+    await homePageImageElement.isDisplayed();
 
     await homePageImageElement.click();
 
